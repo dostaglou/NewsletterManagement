@@ -3,7 +3,9 @@
 one:
   fullname: MyString
   email: MyString
+  newsletter: one
 
 two:
   fullname: MyString
   email: MyString
+  newsletter: two

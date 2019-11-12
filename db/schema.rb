@@ -10,31 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_12_083959) do
+ActiveRecord::Schema.define(version: 2019_11_12_140159) do
 
   create_table "managers", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
+    t.integer "newsletter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["newsletter_id"], name: "index_managers_on_newsletter_id"
   end
 
   create_table "newsletters", force: :cascade do |t|
-    t.integer "subscriber_id"
     t.integer "manager_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["manager_id"], name: "index_newsletters_on_manager_id"
-    t.index ["subscriber_id"], name: "index_newsletters_on_subscriber_id"
   end
 
   create_table "subscribers", force: :cascade do |t|
     t.string "fullname"
     t.string "email"
+    t.integer "newsletter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["newsletter_id"], name: "index_subscribers_on_newsletter_id"
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "name"
+    t.integer "newsletter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["newsletter_id"], name: "index_templates_on_newsletter_id"
   end
 
 end
