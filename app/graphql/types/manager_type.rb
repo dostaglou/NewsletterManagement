@@ -5,6 +5,5 @@ module Types
         field :email, String, null: false 
         field :name, String, null: false
         # need to add the SUBSCRIPTION array  have
-        # need to add TEMPLATES array here
     end
 end

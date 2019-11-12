@@ -21,12 +21,13 @@ class GraphqlController < ApplicationController
   private
 
   def current_user
-    return unless cookies[:token]
+    byebug
+    return unless request.headers[:token]
 
     crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
-    token = crypt.decrypt_and_verify cookies[:token]
-    user_id = token.gsub('user-id:', '').to_i
-    User.find_by id: user_id
+    token = crypt.decrypt_and_verify request.headers[:token]
+    manager_id = token.gsub('manager-id:', '').to_i
+    Manager.find_by id: manager_id
   rescue ActiveSupport::MessageVerifier::InvalidSignature
     nil
   end

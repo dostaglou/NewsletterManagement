@@ -1,5 +1,5 @@
 module Types
-  class ManagerArgs < BaseInputObject
+  class ArgsManager < BaseInputObject
     # graphql_name "Universal Manager Arguments"
     description "Universal Manager Arguments"
 

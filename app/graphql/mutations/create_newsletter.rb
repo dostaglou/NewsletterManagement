@@ -1,12 +1,12 @@
 module Mutations
   class CreateNewsletter < BaseMutation
-    argument :newsletter_args, Types::NewsletterArgs, required: true
+    argument :args_newsletter, Types::ArgsNewsletter, required: true
 
     field :newsletter, Types::NewsletterType, null: false
     field :msg, String, null: false
     
-    def resolve(newsletter_args:)
-      entry = Newsletter.create!( newsletter_args.to_h )
+    def resolve(args_newsletter:)
+      entry = Newsletter.create!( args_newsletter.to_h )
       message = "Newsletter Created!"
       {msg: message , newsletter: entry}
     rescue ActiveRecord::RecordInvalid => e
