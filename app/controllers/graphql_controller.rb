@@ -9,7 +9,6 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # Query context goes here, for example:
       current_user: current_user,
     }
     result = NewsletterManagementSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
@@ -22,7 +21,6 @@ class GraphqlController < ApplicationController
   private
 
   def current_user
-    # if we want to change the sign-in strategy, this is the place to do it
     return unless cookies[:token]
 
     crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
