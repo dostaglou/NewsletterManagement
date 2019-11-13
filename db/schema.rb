@@ -16,10 +16,8 @@ ActiveRecord::Schema.define(version: 2019_11_13_040431) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.integer "newsletter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["newsletter_id"], name: "index_managers_on_newsletter_id"
   end
 
   create_table "newsletters", force: :cascade do |t|

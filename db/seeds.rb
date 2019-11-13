@@ -1,7 +1,44 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+primary_users = %w( zelda dillon pat jordan francios yoshi daisuke )
+generic_users = ("a".."z").to_a
+
+primary_users.each do |u|
+  m = Manager.new(
+    name: "#{u}",
+    email: "#{u}@#{u}.com",
+    password: "123123"
+  )
+  m.save!
+  puts "manager #{u} created"
+  4.times do 
+    n = Newsletter.new(
+      name: Faker::FunnyName.name,
+      manager_id: m.id
+    )
+    n.save
+    puts "newsletter #{n.name} created"
+    2.times do 
+      t = Template.new( 
+        name: Faker::FunnyName.name,
+        newsletter_id: n.id,
+        content: "I am tempalte content",
+        header: "I am header content",
+      )
+      t.save
+      puts "template #{t.name} created"
+    end
+  end
+end
+
+newsletters = Newsletter.all.pluck(:id)
+
+generic_users.each do |u|
+  5.times do 
+    s = Subscriber.create!( 
+      fullname: "#{u}",
+      email: "#{u}@#{u}.com",
+      newsletter_id: newsletters.sample
+    )
+    puts "created: #{s}"
+  end
+  puts "NEXT IN LINE!"
+end
