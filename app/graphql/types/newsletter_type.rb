@@ -7,9 +7,13 @@ module Types
       field :templates, [Types::TemplateType], null: true
       field :newsletter_count, Integer, null: false
       field :subscribers_count, Integer, null: false
+      field :template_count, Integer, null: false
 
       def subscribers_count
         object.subscribers.count
+      end
+      def template_count
+        object.templates.count
       end
   end
 end
