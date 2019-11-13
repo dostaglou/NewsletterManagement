@@ -8,5 +8,7 @@ module Types
     ## following new naming scheme
 
     field :manager_update, mutation: Mutations::ManagerUpdate 
+    field :manager_delete, mutation: Mutations::ManagerDelete
+    
   end
 end
