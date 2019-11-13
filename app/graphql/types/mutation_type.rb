@@ -18,6 +18,7 @@ module Types
 
     # Template mutations
     field :template_create, mutation: Mutations::TemplateCreate
-    
+    field :template_update, mutation: Mutations::TemplateUpdate
+
   end
 end
