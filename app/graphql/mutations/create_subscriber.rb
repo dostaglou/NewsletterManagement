@@ -6,7 +6,6 @@ module Mutations
     field :subscriber, Types::SubscriberType, null: false
 
     def resolve(args_subscriber:)
-      byebug
       entry = Subscriber.create!( args_subscriber.to_h )
       message = "Manager Account Created!"
       {msg: message , subscriber: entry}

@@ -6,6 +6,7 @@ module Mutations
     field :msg, String, null: false
     
     def resolve(args_manager:)
+      byebug
       entry = Manager.create!( args_manager.to_h )
       message = "Manager Account Created!"
       {msg: message , manager: entry}

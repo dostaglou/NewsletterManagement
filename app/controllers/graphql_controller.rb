@@ -21,7 +21,6 @@ class GraphqlController < ApplicationController
   private
 
   def current_user
-    byebug
     return unless request.headers[:token]
 
     crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))

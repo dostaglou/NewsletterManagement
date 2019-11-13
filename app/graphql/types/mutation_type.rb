@@ -4,5 +4,9 @@ module Types
     field :create_subscriber, mutation: Mutations::CreateSubscriber
     field :create_newsletter, mutation: Mutations::CreateNewsletter
     field :signin_manager, mutation: Mutations::SigninManager
+
+    ## following new naming scheme
+
+    field :manager_update, mutation: Mutations::ManagerUpdate 
   end
 end
