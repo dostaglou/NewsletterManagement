@@ -9,6 +9,7 @@ module Types
 
     field :manager_update, mutation: Mutations::ManagerUpdate 
     field :manager_delete, mutation: Mutations::ManagerDelete
+    field :newsletter_create, mutation: Mutations::NewsletterCreate
     
   end
 end
