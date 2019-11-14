@@ -20,7 +20,9 @@ class Subscriber < ApplicationRecord
         "L", "y", "D", 18, 20, 19, 66, 41, 96, 43, "R", "Y", 6, 74, 
         "v", 14, "t", "O", 46]
       code = code_base.sample 6
-      self.unsub_code = code
+      self.unsub_code = code.join
+      self.save!
+      puts "CODE SET"
   end
 
 
