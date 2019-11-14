@@ -7,7 +7,7 @@ module Mutations
 
     def resolve(args_subscriber:)
       entry = Subscriber.create!( args_subscriber.to_h )
-      message = "Manager Account Created!"
+      message = "Subscription Created!"
       {msg: message , subscriber: entry}
     rescue ActiveRecord::RecordInvalid => e
       GraphQL::ExecutionError.new("Account could not be created")  
