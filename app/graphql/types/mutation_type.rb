@@ -11,6 +11,7 @@ module Types
     field :newsletter_create, mutation: Mutations::NewsletterCreate
     field :newsletter_update, mutation: Mutations::NewsletterUpdate
     field :newsletter_destroy, mutation: Mutations::NewsletterDestroy
+    field :newsletter_email_subs, mutation: Mutations::NewsletterEmailSubs
     
     # Subscriber mutations
     field :subscriber_create, mutation: Mutations::SubscriberCreate
