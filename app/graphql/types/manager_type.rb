@@ -10,7 +10,7 @@ module Types
         field :subscribers_count, Integer, null: false
 
         def newsletters_count
-          object.newsletters.count
+          object.newsletters.size
         end
         def subscribers_count
           object.subscribers.count

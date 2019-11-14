@@ -15,7 +15,7 @@ module Types
     # Subscriber mutations
     field :subscriber_create, mutation: Mutations::SubscriberCreate
     field :subscriber_unsub, mutation: Mutations::SubscriberUnsub
-      # Delete
+    field :subscriber_remove, mutation: Mutations::SubscriberRemove
 
     # Template mutations
     field :template_create, mutation: Mutations::TemplateCreate

@@ -10,10 +10,10 @@ module Types
       field :template_count, Integer, null: false
 
       def subscribers_count
-        object.subscribers.count
+        object.subscribers.size
       end
       def template_count
-        object.templates.count
+        object.templates.size
       end
   end
 end
