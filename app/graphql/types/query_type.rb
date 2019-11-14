@@ -9,6 +9,7 @@ module Types
     # Newsletter queries
     field :newsletter_single, resolver: Resolvers::NewsletterSingle
     field :newsletter_email_subs, resolver: Resolvers::NewsletterEmailSubs
-    field :newsletter_subscriber_stats, resolver: Resolvers::NewsletterSubscriberStats
+    field :newsletter_subscriber_add_stats, resolver: Resolvers::NewsletterSubscriberAddStats
+    field :newsletter_subscriber_total_count, resolver: Resolvers::NewsletterSubscriberTotalCount
   end
 end

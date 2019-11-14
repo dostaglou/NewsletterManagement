@@ -1,5 +1,7 @@
 primary_users = %w( zelda dillon pat jordan francios yoshi daisuke )
-generic_users = ("a".."z").to_a
+set1 = ("a".."z").to_a
+set2 = ("A".."Z").to_a
+generic_users = set1 + set2
 
 primary_users.each do |u|
   m = Manager.new(
@@ -36,7 +38,34 @@ generic_users.each do |u|
     s = Subscriber.create!( 
       fullname: "#{u}",
       email: "#{u}@#{u}.com",
-      newsletter_id: newsletters.sample
+      newsletter_id: newsletters.sample,
+      created_at: (rand*14).days.ago
+    )
+    puts "created: #{s}"
+  end
+  puts "NEXT IN LINE!"
+end
+
+set1.each do |u|
+  5.times do 
+    s = Subscriber.create!( 
+      fullname: "#{u}",
+      email: "#{u}@#{u}.com",
+      newsletter_id: newsletters.sample,
+      created_at: (rand*8).round.weeks.ago
+    )
+    puts "created: #{s}"
+  end
+  puts "NEXT IN LINE!"
+end
+
+set2.each do |u|
+  5.times do 
+    s = Subscriber.create!( 
+      fullname: "#{u}",
+      email: "#{u}@#{u}.com",
+      newsletter_id: newsletters.sample,
+      created_at: (rand*24).round.months.ago
     )
     puts "created: #{s}"
   end
