@@ -6,7 +6,6 @@ module Types
     field :manager_signin, mutation: Mutations::ManagerSignin
     field :manager_update, mutation: Mutations::ManagerUpdate 
     field :manager_delete, mutation: Mutations::ManagerDelete
-    field :manager_blast_mail, mutation: Mutations::ManagerBlastMail
 
     # Newsletter mutations
     field :newsletter_create, mutation: Mutations::NewsletterCreate

@@ -1,18 +1,18 @@
-module Mutations
-  class ManagerBlastMail < BaseMutation
+module Resolvers
+  class NewsletterEmailSubs < Resolvers::Base
     argument :template_id, ID, required: true
     argument :newsletter_id, ID, required: true
-    field :msg, String, null: false
+    type String, null: false
 
     def resolve(template_id:, newsletter_id:)
       self.me?
-      return { msg: "can't find newsletter" } unless newsletter = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
-      return { msg: "can't find template" } unless template = Template.find_by(id: template_id, newsletter_id: newsletter.id)
+      return "can't find newsletter" unless newsletter = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
+      return "can't find template"  unless template = Template.find_by(id: template_id, newsletter_id: newsletter.id)
       
       newsletter.subscribers.each do |sub|
         send_mail(template, newsletter.name, sub)
       end
-      { msg: "sent" } 
+      "Emails have been sent"
     end
 
     def send_mail(template, newsletter_name, sub)

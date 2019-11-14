@@ -1,5 +1,5 @@
 module Resolvers
-  class Newsletter < Resolvers::Base
+  class NewsletterSingle < Resolvers::Base
     argument :newsletter_id, ID, required: true
 
     type Types::NewsletterType, null: true
