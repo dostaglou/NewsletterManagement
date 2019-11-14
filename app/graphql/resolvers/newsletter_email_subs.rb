@@ -21,7 +21,8 @@ module Resolvers
       puts "To: #{sub.fullname}"
       puts "From: #{newsletter_name}!"
       puts "#{template[:content]}"
-      puts "To unsub from these messages, please go to www.unsub/sub. Enter your fullname, email address, and the following code: #{sub.unsub_code}"
+      puts "To unsub from these messages, please go to www.unsub/sub."
+      puts "Enter your single code #{sub.id}, email address, and the following code: #{sub.unsub_code}"
     end
   end
 end
