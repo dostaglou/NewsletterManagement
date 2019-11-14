@@ -1,5 +1,5 @@
 class Subscriber < ApplicationRecord
-  belongs_to :newsletter
+  belongs_to :newsletter, counter_cache: true
   validates :fullname, presence: true
   validates :email, presence: true
 

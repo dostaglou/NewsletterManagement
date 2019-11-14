@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_004329) do
+ActiveRecord::Schema.define(version: 2019_11_14_022649) do
 
   create_table "managers", force: :cascade do |t|
     t.string "name"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 2019_11_14_004329) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "subscribers_count"
+    t.integer "templates_count"
     t.index ["manager_id"], name: "index_newsletters_on_manager_id"
   end
 
