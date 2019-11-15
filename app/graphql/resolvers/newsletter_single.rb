@@ -6,7 +6,7 @@ module Resolvers
 
     def resolve(newsletter_id:)
       self.me?
-      me.newsletters.find_by(id: newsletter_id)
+      self.no_access unless me.newsletters.find_by(id: newsletter_id)
     end
   end
 end
