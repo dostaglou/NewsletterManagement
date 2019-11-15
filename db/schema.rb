@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_070013) do
+ActiveRecord::Schema.define(version: 2019_11_15_073853) do
 
   create_table "email_sents", force: :cascade do |t|
     t.string "targets"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_11_15_070013) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "unsub_code"
+    t.string "status"
     t.index ["newsletter_id"], name: "index_subscribers_on_newsletter_id"
   end
 
