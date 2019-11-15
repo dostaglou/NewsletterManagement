@@ -3,6 +3,25 @@ set1 = ("a".."z").to_a
 set2 = ("A".."Z").to_a
 generic_users = set1 + set2
 
+prime = Manager.new(
+  name: "Prime",
+  email: "prime@prime.com",
+  password: "prime"
+)
+prime.save!
+n = Newsletter.create!(
+  name: "prime-newsletter",
+  manager_id: prime.id
+)
+t = Template.create!(
+  name: Faker::FunnyName.name,
+  newsletter_id: n.id,
+  content: "I am prime template content",
+  header: "I am prime header content",
+)
+
+puts "Prime!"
+
 primary_users.each do |u|
   m = Manager.new(
     name: "#{u}",
@@ -22,7 +41,7 @@ primary_users.each do |u|
       t = Template.new( 
         name: Faker::FunnyName.name,
         newsletter_id: n.id,
-        content: "I am tempalte content",
+        content: "I am template content",
         header: "I am header content",
       )
       t.save

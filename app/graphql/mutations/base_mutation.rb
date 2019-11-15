@@ -12,5 +12,8 @@ module Mutations
         def me
             context[:current_user]
         end
+        def crisis(string)
+          raise GraphQL::ExecutionError.new(string)
+        end
     end
 end
