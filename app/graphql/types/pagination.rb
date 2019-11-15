@@ -7,7 +7,8 @@ module Types
 
     def prepare
       return GraphQL::ExecutionError.new("limit must be between 1 and 30") unless (1..31).include?(limit)
-      [offset, limit]
+      {offset: offset, limit: limit}
+      # [offset, limit]
     end
   end
 end
