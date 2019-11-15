@@ -7,13 +7,13 @@ module Mutations
 
     def resolve(template_id: nil, non_template_content: nil, newsletter_id:)
       self.me?
-      # byebug #"here"
-      return self.crisis("please provide either a template or non-template-content") unless template_id || non_template_content
-
+      self.crisis("please provide either a template or non-template-content") unless template_id || non_template_content
+      
+      # return self.crisis("Could not find template with that id in your list") unless me.
       if template_id
         
-        return "can't find newsletter" unless newsletter = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
-        return "can't find template"  unless template = Template.find_by(id: template_id, newsletter_id: newsletter.id)
+        self.crisis("can't find newsletter") unless newsletter = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
+        self.crisis("can't find template") unless template = Template.find_by(id: template_id, newsletter_id: newsletter.id)
         targets = ""
         newsletter.subscribers.each do |sub|
           send_mail(template, newsletter.name, sub)
