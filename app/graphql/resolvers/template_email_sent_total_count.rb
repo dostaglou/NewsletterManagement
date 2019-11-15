@@ -7,7 +7,7 @@ module Resolvers
     type GraphQL::Types::JSON, null: false
 
     def resolve(newsletter_id:, template_id:, filter_subscriber_stats:)
-      self.me?
+      self.me? 
       return { msg: "Must be a Template or Newsletter belonging to you" } unless template = me.templates.find_by(newsletter_id: newsletter_id, id: template_id)
       date_arr = (0..6).to_a.reverse
       data = {}
