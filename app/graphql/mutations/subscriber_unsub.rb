@@ -11,7 +11,8 @@ module Mutations
       message = "No Action : please verify id, code, and email"
       return { msg: message, subscriber: nil } unless entry = Subscriber.find_by(id: sub_id, email: args_subscriber[:email])
       return { msg: message, subscriber: nil } unless entry.unsub_code == unsub_code
-      entry.destroy
+      entry.status = "unsubbed"
+      entry.save
       message = "you are unsubed"
       {msg: message, subscriber: entry}
     end

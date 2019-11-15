@@ -8,7 +8,7 @@ module Mutations
     def resolve(template_id:)
       self.me?
       entry = Template.where(id: template_id).where(newsletter_id: [me.newsletters.pluck(:id)].flatten).first
-      if entry&.delete
+      if entry&.status = "unsubbed"
         message = "Your Tempalte has been deleted"
         return { msg: message, template: entry }
       else
