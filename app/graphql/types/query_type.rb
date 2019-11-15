@@ -15,6 +15,7 @@ module Types
     field :newsletter_subscriber_total_count, resolver: Resolvers::NewsletterSubscriberTotalCount
 
     # Template queries
+    field :template_single, resolver: Resolvers::TemplateSingle
     field :template_email_sent_total_count, resolver: Resolvers::TemplateEmailSentTotalCount
 
   end
