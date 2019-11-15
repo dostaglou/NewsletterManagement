@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_063245) do
+ActiveRecord::Schema.define(version: 2019_11_15_070013) do
 
   create_table "email_sents", force: :cascade do |t|
     t.string "targets"
     t.integer "template_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
     t.index ["template_id"], name: "index_email_sents_on_template_id"
   end
 

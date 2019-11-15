@@ -10,14 +10,8 @@ module Resolvers
       self.me? 
       date_arr = (0..6).to_a.reverse
       data = {}
-      byebug
-      template = nil
-      if template_id == "1"
-        return self.crisis("err") unless template = nil
-      else
-        return self.crisis("Must be a Template or Newsletter belonging to you") unless template = me.templates.find_by(newsletter_id: newsletter_id, id: template_id)
-      end
-
+      
+      return self.crisis("Must be a Template-Newsletter pair belonging to you") unless template = me.templates.find_by(newsletter_id: newsletter_id, id: template_id)
       case
       when filter_subscriber_stats == "days"
         date_arr.each do |el|

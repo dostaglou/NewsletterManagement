@@ -26,14 +26,15 @@ module Mutations
         )
       else
         return "can't find newsletter" unless newsletter = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
+        generic_template = newsletter.templates.first.id
         targets = ""
         newsletter.subscribers.each do |sub|
           send_mail2(non_template_content, newsletter.name, sub)
           targets += "#{sub.id},"
         end
         EmailSent.create!(
-          template_id: 1,
-          targets: targets
+          template_id: generic_template,
+          targets: targets, 
         )
       end
 
