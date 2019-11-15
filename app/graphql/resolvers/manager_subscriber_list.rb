@@ -5,7 +5,7 @@ module Resolvers
 
     def resolve(pagination:[0,10])
       self.me?
-      self.no_access unless me.subscribers.order(id: "desc")&.offset(pagination[0])&.limit(pagination[1])
+      me.subscribers.order(id: "desc")&.offset(pagination[0])&.limit(pagination[1])
     end
   end
 end
