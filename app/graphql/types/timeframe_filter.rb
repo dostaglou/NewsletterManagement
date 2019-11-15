@@ -1,5 +1,5 @@
 module Types
-  class FilterSubscriberStats < BaseEnum
+  class TimeframeFilter < BaseEnum
     value "days"
     value "weeks"
     value "months"
