@@ -7,17 +7,17 @@ module Resolvers
 
     def resolve(template_id: nil, non_template_content: nil, newsletter_id:)
       self.me?
-      return "please provide either a template or non-template-content" unless template_id || non_template_content
+      return self.crisis("please provide either a template or non-template-content"} unless template_id || non_template_content
 
       if template_id
-        return "can't find newsletter" unless newsletter = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
-        return "can't find template"  unless template = Template.find_by(id: template_id, newsletter_id: newsletter.id)
+        return self.crisis("can't find newsletter") unless newsletter = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
+        return self.crisis("can't find template")  unless template = Template.find_by(id: template_id, newsletter_id: newsletter.id)
       
         newsletter.subscribers.each do |sub|
           send_mail(template, newsletter.name, sub)
         end
       else
-        return "can't find newsletter" unless newsletter = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
+        return self.crisis("can't find newsletter") unless newsletter = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
 
         newsletter.subscribers.each do |sub|
           send_mail2(non_template_content, newsletter.name, sub)

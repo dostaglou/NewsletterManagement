@@ -15,5 +15,9 @@ module Resolvers
         def no_access
           raise GraphQL::ExecutionError.new("The item either doesn't exist or you don't have access")
         end
+
+        def crisis(string)
+          raise GraphQL::ExecutionError.new(string)
+        end
     end
 end
