@@ -9,31 +9,17 @@ module Resolvers
     def resolve(newsletter_id:, filter_subscriber_stats: nil)
       self.me?
       return { msg: "Must be a Template or Newsletter belonging to you" } unless newsletter = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
-      date_arr = (0..6).to_a.reverse
-      data = {}
       case
       when filter_subscriber_stats == "days"
-        date_arr.each do |el|
-          number = newsletter.subscribers.where("created_at < ?", el.days.ago).count
-          data[el.days.ago] = number
-        end
+        return newsletter.subscribers.where(created_at: (7.days.ago)..(Date.today)).group('STRFTIME("%d", created_at)').count
       when filter_subscriber_stats == "weeks"
-        date_arr.each do |el|
-          number = newsletter.subscribers.where("created_at < ?", el.weeks.ago).count
-          data[el.weeks.ago] = number
-        end
+        return newsletter.subscribers.where(created_at: (7.weeks.ago)..(Date.today)).group('STRFTIME("%W", created_at)').count
       when filter_subscriber_stats == "months"
-        date_arr.each do |el|
-          number = newsletter.subscribers.where("created_at < ?", el.months.ago).count
-          data[el.months.ago] = number
-        end
+        return newsletter.subscribers.where(created_at: (7.months.ago)..(Date.today)).group('STRFTIME("%m", created_at)').count
       when filter_subscriber_stats == "years"
-        date_arr.each do |el|
-          number = newsletter.subscribers.where("created_at < ?", el.years.ago).count
-          data[el.years.ago] = number
-        end
+        return newsletter.subscribers.where(created_at: (7.years.ago)..(Date.today)).group('STRFTIME("%Y", created_at)').count
       end
-      data
+      { data: "no data found with query" }
     end
   end
 end
