@@ -1,7 +1,7 @@
 class Newsletter < ApplicationRecord
   belongs_to :manager, counter_cache: true
-  has_many :subscribers
-  has_many :templates
+  has_many :subscribers, dependent: :destroy
+  has_many :templates, dependent: :destroy
   validates :name, presence: true
 
   after_create :generic_template

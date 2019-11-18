@@ -7,13 +7,13 @@ module Mutations
     
     def resolve(args_newsletter:, newsletter_id:)
       self.me?
-      entry = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
+      entry = me.newsletters.find_by(id: newsletter_id)
       if entry 
         entry.update!( args_newsletter.to_h )
         message = "Newsletter Updated!"
         {msg: message , newsletter: entry}
       else
-        return {newsletter: nil, msg: "Could not find submitted newsletter id belonging to you" }
+        me.crisis("Could not find newsletter belonging to you with that id") 
       end
     end
   end

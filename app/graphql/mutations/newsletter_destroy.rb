@@ -6,13 +6,13 @@ module Mutations
     
     def resolve(newsletter_id:)
       self.me?
-      entry = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
+      entry = me.newsletters.find_by(id: newsletter_id)
       if entry 
         entry.destroy
         message = "Newsletter Deleted!"
         {msg: message , newsletter: entry}
       else
-        return {newsletter: nil, msg: "Could not find submitted newsletter id belonging to you" }
+        self.crisis("Could not find submitted newsletter id belonging to you" )
       end
     end
   end
