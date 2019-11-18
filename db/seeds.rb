@@ -71,3 +71,13 @@ set2.each do |u|
   end
   puts "NEXT IN LINE!"
 end
+
+subs = Subscriber.all
+
+subs.each_with_index do |sub, index|
+  if index.even?
+    sub.status = "unsubbed"
+    sub.unsub_date = Date.yesterday
+    puts "one unsubbed"
+  end
+end
