@@ -13,11 +13,10 @@ module Mutations
         message = "Template Created"
         return { msg: message, template: entry }
       else
-        message = "None of your newsletters have that ID"
-        return { msg: message, template: nil}
+        self.crisis("None of your newsletters have that ID")
       end
     rescue ActiveRecord::RecordInvalid => e
-      GraphQL::ExecutionError.new("Template could not be created - likely the name is already in use") 
+      GraphQL::ExecutionError.new("Template could not be created") 
     end
   end
 end

@@ -12,8 +12,7 @@ module Mutations
         message = "Your Tempalte has been deleted"
         return { msg: message, template: entry }
       else
-        message = "Could not delete - check template ID"
-        return { msg: message, template: entry}
+        self.crisis("could not delete template. Please confirm ID")
       end
     end
   end

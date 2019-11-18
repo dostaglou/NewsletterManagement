@@ -16,8 +16,7 @@ module Mutations
         message = "Template Updated"
         return { msg: message, template: entry }
       else
-        message = "Template could not be updated - check arguments for accuracy and name uniqueness"
-        return { msg: message, template: nil }
+        self.crisis("Template could not be updated - check arguments for accuracy and name uniqueness")
       end
     end
   end
