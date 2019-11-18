@@ -12,6 +12,7 @@ module Mutations
       return { msg: message, subscriber: nil } unless entry = Subscriber.find_by(id: sub_id, email: args_subscriber[:email])
       return { msg: message, subscriber: nil } unless entry.unsub_code == unsub_code
       entry.status = "unsubbed"
+      entry.unsub_date = Date.today
       entry.save
       message = "you are unsubed"
       {msg: message, subscriber: entry}

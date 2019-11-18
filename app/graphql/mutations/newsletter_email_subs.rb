@@ -10,11 +10,10 @@ module Mutations
       self.crisis("please provide either a template or non-template-content") unless template_id || non_template_content
       
       if template_id
-        # below line only modified
         self.crisis("can't find newsletter") unless newsletter = me.newsletters.find_by(id: newsletter_id)
         self.crisis("can't find template") unless template = Template.find_by(id: template_id, newsletter_id: newsletter.id)
         targets = ""
-        newsletter.subscribers.each do |sub|
+        newsletter.subscribers.where(status: "subbed").each do |sub|
           send_mail(template, newsletter.name, sub)
           targets += "#{sub.id},"
         end
@@ -24,11 +23,10 @@ module Mutations
           targets: targets
         )
       else
-        # below line of code modified
         return "can't find newsletter" unless newsletter = me.newsletters.find_by(id: newsletter_id)
         generic_template = newsletter.templates.first.id
         targets = ""
-        newsletter.subscribers.each do |sub|
+        newsletter.subscribers.where(status: "subbed").each do |sub|
           send_mail2(non_template_content, newsletter.name, sub)
           targets += "#{sub.id},"
         end

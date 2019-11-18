@@ -3,7 +3,6 @@ module Mutations
       null true
       argument :args, Types::ArgsManager, required: true
       field :token, String, null: true
-      # field :manager, Types::ManagerType, null: true
 
       def resolve(args:)
           return unless args[:email]
