@@ -8,7 +8,7 @@ module Mutations
     def resolve(args_template:)
       self.me?
       parent_id = args_template.newsletter_id.to_i
-      if Newsletter.find_by(id: parent_id, manager_id: me.id)
+      if me.newsletters.find_by(id: parent_id) 
         entry = Template.create!( args_template.to_h )
         message = "Template Created"
         return { msg: message, template: entry }
