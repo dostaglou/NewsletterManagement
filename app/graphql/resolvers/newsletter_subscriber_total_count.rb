@@ -13,23 +13,47 @@ module Resolvers
       case
       when timeframe_filter == "days"
         date_arr.each do |el|
-          number = newsletter.subscribers.where("created_at < ?", el.days.ago).count 
+          number = newsletter.subscribers
+                              .where("created_at < ?", el.days.ago)
+                              .where("unsub_date > ?", el.days.ago)
+                  .or(newsletter.subscribers
+                              .where("created_at < ?", el.days.ago)
+                              .where(unsub_date: nil))
+                              .count 
           data[el.days.ago] = number
         end
       when timeframe_filter == "weeks"
         date_arr.each do |el|
-          number = newsletter.subscribers.where("created_at < ?", el.weeks.ago).count 
-          data[el.weeks.ago] = number
+          number = newsletter.subscribers
+                              .where("created_at < ?", el.weeks.ago)
+                              .where("unsub_date > ?", el.weeks.ago)
+                  .or(newsletter.subscribers
+                              .where("created_at < ?", el.weeks.ago)
+                              .where(unsub_date: nil))
+                              .count 
+          data[el.days.ago] = number
         end
       when timeframe_filter == "months"
         date_arr.each do |el|
-          number = newsletter.subscribers.where("created_at < ?", el.months.ago).count 
-          data[el.months.ago] = number
+          number = newsletter.subscribers
+                              .where("created_at < ?", el.montsh.ago)
+                              .where("unsub_date > ?", el.montsh.ago)
+                  .or(newsletter.subscribers
+                              .where("created_at < ?", el.montsh.ago)
+                              .where(unsub_date: nil))
+                              .count 
+          data[el.days.ago] = number
         end
       when timeframe_filter == "years"
         date_arr.each do |el|
-          number = newsletter.subscribers.where("created_at < ?", el.years.ago).count 
-          data[el.years.ago] = number
+          number = newsletter.subscribers
+                              .where("created_at < ?", el.years.ago)
+                              .where("unsub_date > ?", el.years.ago)
+                  .or(newsletter.subscribers
+                              .where("created_at < ?", el.years.ago)
+                              .where(unsub_date: nil))
+                              .count 
+          data[el.days.ago] = number
         end
       end
       data
