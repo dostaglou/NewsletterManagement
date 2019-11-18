@@ -8,7 +8,8 @@ module Resolvers
 
     def resolve(newsletter_id:, timeframe_filter: "days")
       self.me?
-      return { msg: "Must be a Template or Newsletter belonging to you" } unless newsletter = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
+      # below line of code modified
+      return { msg: "Must be a Template or Newsletter belonging to you" } unless newsletter = me.newsletters.find_by(id: newsletter_id)
       case
       when timeframe_filter == "days"
         time_frame = (Date.today - 1.week)..(Date.today.end_of_day)
@@ -23,7 +24,6 @@ module Resolvers
         time_frame = (Date.today - 7.year)..(Date.today.end_of_day)
         grouping = 'STRFTIME("%Y", created_at)'
       end
-      byebug
       newsletter.subscribers.where(created_at: time_frame)
       .group(grouping)
       .count 
