@@ -7,7 +7,8 @@ module Resolvers
 
     def resolve(newsletter_id:, timeframe_filter: "days")
       self.me?
-      return { msg: "Must be a Template or Newsletter belonging to you" } unless newsletter = Newsletter.find_by(id: newsletter_id, manager_id: me.id)
+      #below line of code modified
+      return { msg: "Must be a Template or Newsletter belonging to you" } unless newsletter = me.newsletters.find_by(id: newsletter_id)
       date_arr = (0..6).to_a.reverse
       data = {}
       case
