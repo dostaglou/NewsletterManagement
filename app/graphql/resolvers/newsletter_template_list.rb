@@ -6,8 +6,12 @@ module Resolvers
 
     def resolve(pagination:{offset: 0, limit: 10, order: { :id => :desc } }, newsletter_id:)
       self.me?
-      results = me.templates.where(newsletter_id: newsletter_id).order(id: pagination[:order]).offset(pagination[:offset])&.limit(pagination[:limit])
-      results.nil? ? results : self.no_access
+      results = me.templates
+                  .where(newsletter_id: newsletter_id)
+                  .order(pagination[:order])
+                  .offset(pagination[:offset])
+                  .limit(pagination[:limit])
+      results.nil? ? self.no_access : results
     end
   end
 end
