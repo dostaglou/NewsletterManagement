@@ -78,6 +78,7 @@ subs.each_with_index do |sub, index|
   if index.even?
     sub.status = "unsubbed"
     sub.unsub_date = Date.yesterday
-    puts "one unsubbed"
+    sub.save!
+    puts "#{sub.status}"
   end
 end

@@ -8,12 +8,16 @@ module Types
       field :newsletter_count, Integer, null: false
       field :subscribers_count, Integer, null: false
       field :template_count, Integer, null: false
+      field :subscriber_numbers, Integer, null: false
 
       def subscribers_count
         object.subscribers.size
       end
       def template_count
         object.templates.size
+      end
+      def subscriber_numbers
+        object.subscribers.where(status: "subbed").count
       end
   end
 end

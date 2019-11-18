@@ -1,7 +1,10 @@
 class Subscriber < ApplicationRecord
   belongs_to :newsletter, counter_cache: true
+  attribute :status, :string, default: "subbed"
+  
   validates :fullname, presence: true
   validates :email, presence: true
+  validates :status, presence: true
 
   after_create :unsub_code_setter
 
