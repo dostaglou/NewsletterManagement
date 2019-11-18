@@ -7,9 +7,7 @@ module Mutations
     
     def resolve(args_newsletter:)
       self.me?
-      entry = Newsletter.new( args_newsletter.to_h )
-      entry.manager = me 
-      entry.save!
+      entry = me.newsletters.create!( args_newsletter.to_h )
       message = "Newsletter Account Created!"
       {msg: message , newsletter: entry}
     rescue ActiveRecord::RecordInvalid => e
